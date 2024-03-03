@@ -1,0 +1,358 @@
+.noSelected {
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.No_Conversation {
+  height: 500px;
+  width: 500px;
+  /* margin-top: -30px; */
+}
+
+.messages {
+  height: 100%;
+  width: 100%;
+  /* padding: 12px; */
+  /* border-left: 1px solid rgb(189, 193, 189); */
+}
+
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  /* margin-left: 15px; */
+  /* padding-bottom: 15px; */
+  /* border-radius: 50px; */
+  background: var(--chatcontainer-bg) !important;
+  background: none;
+}
+
+.messageBox {
+  display: flex;
+  /* justify-content: space-between; */
+  flex-direction: column;
+  /* gap: 40px; */
+  padding: 0px 20px;
+  /* margin-top: -10px; */
+  height: 74.5vh;
+  overflow-y: scroll;
+  margin-left: -2px;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  /* gap: 5px; */
+  /* padding: 5px; */
+}
+.details.owner {
+  align-self: flex-end;
+}
+.imageContainer {
+  /* width: 80px; */
+  margin-top: 4px;
+  /* padding: 10px; */
+}
+.personalDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 5px;
+  width: auto;
+  padding: 10px;
+}
+.time,
+.userName {
+  font-size: 10px;
+  align-self: flex-end;
+  white-space: noWrap;
+}
+.userName {
+  font-size: 12px;
+  font-weight: 600;
+}
+.seenMessage {
+  font-size: 12px;
+  align-self: flex-start;
+  margin-left: 10px;
+}
+
+.friendDetails {
+  display: flex;
+  gap: 5px;
+}
+
+.senMessageView {
+  padding: 10px 5px;
+  background: rgba(236, 233, 233, 0.626);
+  width: 300px;
+  border-radius: 30px;
+}
+.text {
+  padding: 10px;
+  border-radius: 8px;
+  word-wrap: break-word;
+  background: #f2f2f2;
+  max-width: 150px;
+  width: auto;
+  color: black;
+}
+.messageBottom {
+  font-size: 10px;
+}
+
+.owner .personalDetails .text {
+  background: #c2e7ff;
+  color: black;
+}
+.email,
+.text {
+  font-size: 14px;
+}
+.email {
+  align-self: flex-start !important;
+}
+
+.sendBoxContainer {
+  padding: 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.sendBox {
+  position: sticky;
+  bottom: 0;
+  border-top: var(--border-colors);
+  display: flex;
+  align-items: center;
+  min-height: 5vh;
+  padding: 5px 15px 5px 0px;
+  width: 100%;
+  justify-content: space-between;
+}
+.sendBox input[type="text"] {
+  margin-bottom: -2px;
+  height: auto;
+  border: 0;
+  outline: 0;
+  background: var(--input-box-bg);
+  color: var(--text-total-color);
+  white-space: wrap;
+  padding: 10px !important;
+  width: 450px !important;
+}
+.sendBox .search-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.sendBox .sendButtonContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sendBox .fas {
+  margin: 0;
+}
+
+.sendBox textarea {
+  display: table-cell;
+  vertical-align: middle;
+  border: 0;
+  outline: 0;
+  background: var(--input-box-bg);
+  color: var(--text-total-color);
+  white-space: wrap;
+  padding: 5px;
+  padding-inline-start: 15px;
+  width: 100%;
+  font-family: poppins;
+}
+
+/* adding multiline input */
+.css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root {
+  padding: 0px !important;
+  background: var(--input-box-bg);
+  color: var(--text-total-color);
+}
+
+.uploadingFileIcon {
+  cursor: pointer;
+  margin-top: 4px;
+  color: grey;
+  padding: 6px 6px;
+  border-radius: 50% !important;
+  transition: background-color 0.3s, color 0.3s;
+}
+.sendBox .send-container {
+  margin-top: 4px;
+  padding: 6px 6px;
+}
+.blockUnblock {
+  padding: 8px;
+  width: auto;
+  justify-self: flex-end !important;
+  margin-right: 10px;
+  white-space: noWrap;
+  /* position: absolute;
+  right: 20px; */
+}
+.downGoing {
+  padding: 5px 12px;
+  background: rgba(207, 203, 203, 0.566);
+  position: sticky;
+
+  /* left: 0px; */
+
+  top: -0px !important;
+  width: 10px;
+  border-radius: 50%;
+  /* bottom: 150px; */
+  margin-left: -80px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+}
+
+.downGoing:hover {
+  background: rgb(207, 203, 203);
+}
+.downGoing i {
+  /* margin-left: -94px; */
+  font-size: 12px;
+}
+
+.uploadingFileIcon:hover {
+  color: #0b57d0;
+  background-color: rgba(198, 203, 208, 0.5);
+  border-radius: 50% !important;
+}
+
+.uploadingFileIcon .fileName {
+  white-space: wrap;
+}
+.messageNavbar {
+  padding: 10px 0px 3px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* border-bottom: var(--border-colors); */
+  position: relative;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  background: var(--messageNavbar-bg) !important;
+  color: var(--messageNavbar-text) !important;
+  /* border-top-right-radius: 20px; */
+}
+.bottom-line {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-bottom: var(--border-colors);
+  position: relative;
+  width: 100%;
+  /* margin-left: 8%; */
+  margin-top: -5px;
+}
+
+.specificDay {
+  align-self: center !important;
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  background: #f8f8f8;
+  border-radius: 5px;
+  color: black !important;
+}
+
+@media (max-width: 768px) {
+  .downGoing {
+    padding: 5px 12px;
+    background: rgba(207, 203, 203, 0.566);
+    position: fixed;
+    top: 90% !important;
+    right: 42% !important;
+    bottom: 20px !important;
+    height: 20px;
+    background: rgba(207, 203, 203) !important;
+  }
+  .downGoing:hover {
+    background: rgb(207, 203, 203);
+  }
+  .downGoing i {
+    /* margin-left: 4px !important; */
+  }
+  .messageContainer {
+    border-radius: 0px !important;
+  }
+  .messageBox {
+    height: 91vh;
+    min-height: 62vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0 0;
+    padding-top: 10px;
+  }
+  .sendBoxContainer {
+    justify-content: center;
+    gap: 2px !important;
+    align-items: center !important;
+    width: 100%;
+  }
+
+  .sendBox {
+    width: 100%;
+    position: sticky;
+    bottom: 20px !important;
+  }
+
+  .sendBox input[type="text"],
+  .sendBox textarea {
+    border: none !important;
+    outline: 0;
+    white-space: wrap;
+    margin: 0 20px;
+    padding: 0;
+    font-family: poppins;
+  }
+  .senMessageView {
+    width: 150px;
+    padding-right: 0px !important;
+  }
+  .sendingFiles {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .messageNavbar {
+    z-index: 999 !important;
+    padding: 10px 2px !important;
+    position: sticky;
+    top: 0px;
+  }
+  .specificDay {
+    position: sticky;
+    top: 0px !important;
+  }
+  .details.owner:first-of-type {
+    margin-top: 200px;
+  }
+}
+.message-upper {
+  height: fit-content;
+  background-color: white;
+}
