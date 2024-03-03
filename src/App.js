@@ -201,33 +201,6 @@ const App = () => {
   }, []);
 
 
-  useEffect(() => {
-    if (localStorage.getItem('user')) {
-      ApiServices.userLivePitches().then(res => {
-        dispatch(setUserLivePitches(res.data))
-      }).catch(err => {
-        dispatch(setToast({
-          message: "Error while fetching pitches",
-          bgColor: ToastColors.failure,
-          visible: "yes",
-        }))
-      })
-    }
-  }, [notificationAlert]);
-
-  useEffect(() => {
-    if (localStorage.getItem('user')) {
-      ApiServices.getuserPitches().then(res => {
-        dispatch(setUserAllPitches(res.data))
-      }).catch(err => {
-        dispatch(setToast({
-          message: "Error while fetching pitches",
-          bgColor: ToastColors.failure,
-          visible: "yes",
-        }))
-      })
-    }
-  }, [notificationAlert]);
   return (
     <div>
       <Suspense

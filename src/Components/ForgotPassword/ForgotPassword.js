@@ -447,17 +447,9 @@ const ResetPassword = () => {
                   onClick={() => handleLoginTypeChange("email")}
                 />
                 <label for="tab1">Email</label>
-                <input
-                  onClick={() => handleLoginTypeChange("mobile")}
-                  type="radio"
-                  id="tab2"
-                  name="tabGroup1"
-                  class="tab"
-                />
-                <label for="tab2">Mobile</label>
               </div>
               <form action="">
-                {loginType === "email" ? (
+                {loginType === "email" && (
                   <>
                     <input
                       type="text"
@@ -510,56 +502,7 @@ const ResetPassword = () => {
                       </>
                     )}
                   </>
-                ) : (
-                  <>
-                    <input
-                      type="text"
-                      disabled={mobileVerified}
-                      value={mobile}
-                      className={
-                        mobileValid !== null &&
-                        (mobileValid ? "valid" : "invalid")
-                      }
-                      placeholder="Mobile Number"
-                      onChange={(e) => handleMobileChange(e.target.value)}
-                    />
-
-                    {mobileValid && !otpVisible && (
-                      <button
-                        type="button"
-                        className="full-width-button"
-                        onClick={handleGetOtp}
-                      >
-                        Get OTP
-                      </button>
-                    )}
-                    {otpVisible && mobileVerified !== true && (
-                      <>
-                        <input
-                          type="text"
-                          value={mobileOtp}
-                          className={
-                            mobileOtp !== null &&
-                            (mobileOtp.length === 6 ? "valid" : "invalid")
-                          }
-                          placeholder="Enter OTP"
-                          name="mobileOtp"
-                          onChange={handleChanges}
-                        />
-                        {mobileOtp !== null && mobileOtp.length === 6 && (
-                          <button
-                            type="button"
-                            id="mobileVerify"
-                            onClick={verifyOtp}
-                            style={{ whiteSpace: "noWrap" }}
-                          >
-                            Verify OTP
-                          </button>
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
+                ) }
                 {(emailVerified || mobileVerified) && (
                   <>
                     <input
