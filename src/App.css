@@ -277,27 +277,27 @@ button:hover {
 
 .dot:nth-child(1) {
   animation-delay: 0.1s;
-  background: #4e54c7;
+  background: #e5a544;
 }
 
 .dot:nth-child(2) {
   animation-delay: 0.2s;
-  background: #ff6824;
+  background: #95e544;
 }
 
 .dot:nth-child(3) {
   animation-delay: 0.3s;
-  background: #1799ac;
+  background: #44e585;
 }
 
 .dot:nth-child(4) {
   animation-delay: 0.4s;
-  background: #ff6824;
+  background:  #44b5e5;
 }
 
 .dot:nth-child(5) {
   animation-delay: 0.5s;
-  background: #4e54c7;
+  background: #6444e5;
 }
 
 @keyframes slide {
