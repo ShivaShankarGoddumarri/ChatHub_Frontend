@@ -190,7 +190,7 @@ img {
 } */
 
 .userDetails {
-  height: 380px;
+  height: 280px;
   width: 380px;
   background: var(--user-details-container-bg);
   position: absolute;
@@ -355,6 +355,7 @@ img {
   gap: 10px;
   margin-top: 31px;
   align-items: center;
+  justify-content: center;
 }
 
 .Account {
@@ -377,7 +378,8 @@ img {
   color: #fff;
   background-color: var(--button);
   padding: 20px;
-  border-radius: 5px 28px 28px 5px;
+  border-radius: 28px;
+  text-align: center;
   /* margin-top: -63px; */
   width: 35%;
   /* margin-left: 194px; */
@@ -546,7 +548,7 @@ img {
     color: rgba(32, 30, 30, 0.955);
   }
   .userDetails {
-    height: 370px;
+    height: 270px;
     width: 335px;
     top: 65px;
     right: 6px;

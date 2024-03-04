@@ -23,7 +23,7 @@ import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import ThreePOutlinedIcon from "@mui/icons-material/ThreePOutlined";
 import PersonSearchOutlinedIcon from "@mui/icons-material/PersonSearchOutlined";
 import PlagiarismOutlinedIcon from "@mui/icons-material/PlagiarismOutlined";
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { io } from "socket.io-client";
 
 import Box from "@mui/material/Box";
@@ -80,7 +80,7 @@ const Navbar = () => {
     (store) => store.auth.loginDetails
   );
 
-  const [logoutOpen, setLogoutOpen] = useState(false)
+  const [logoutOpen, setLogoutOpen] = useState(false);
   const socket = useRef();
   useEffect(() => {
     socket.current = io(socket_io);
@@ -124,7 +124,7 @@ const Navbar = () => {
       notificationSound.play();
     }
     if (messageCount.length > 0) {
-      messageSound.play()
+      messageSound.play();
     }
   }, [notificationAlert, messageCount]);
   const liveMessage = useSelector((state) => state.conv.liveMessage);
@@ -134,27 +134,22 @@ const Navbar = () => {
       ApiServices.getTotalMessagesCount({
         receiverId: user_id,
         checkingUser: user_id,
-      }).then((res) => {
-        const d = []
-        for (let i = 0; i < res.data.length; i++) {
-          d.push({
-            conversationId: res.data[i]._id,
-            receiverId: res.data[i].members.filter((f) => f !== user_id)[0],
-            lastText: res.data[i].lastMessageText
-          })
-        }
-        console.log(d)
-        dispatch(
-          setMessageCount(
-            d
-          )
-        );
-      }).catch(err => {
-
-      });;
+      })
+        .then((res) => {
+          const d = [];
+          for (let i = 0; i < res.data.length; i++) {
+            d.push({
+              conversationId: res.data[i]._id,
+              receiverId: res.data[i].members.filter((f) => f !== user_id)[0],
+              lastText: res.data[i].lastMessageText,
+            });
+          }
+          console.log(d);
+          dispatch(setMessageCount(d));
+        })
+        .catch((err) => {});
     }
-  }, [liveMessage])
-
+  }, [liveMessage]);
 
   const [notificationDrawerState, setNotificationDrawerState] = useState({
     right: false,
@@ -207,49 +202,35 @@ const Navbar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {width < 770 && (
-          <>
-
-            <ListItem
-              button
-              key="conversations"
-              onClick={() => navigate("/")}
-            >
-              <ListItemIcon>
-                <MessageOutlinedIcon className="menu-icon" />
-                {messageCount.length > 0 && <div
+        <>
+          <ListItem button key="conversations" onClick={() => navigate("/")}>
+            <ListItemIcon>
+              <MessageOutlinedIcon className="menu-icon" />
+              {messageCount.length > 0 && (
+                <div
                   className="Conversations-count mobile"
                   title="unread conversations"
                 >
                   {messageCount.length}
-                </div>}
-              </ListItemIcon>
-              <ListItemText primary="Conversations" />
+                </div>
+              )}
+            </ListItemIcon>
+            <ListItemText primary="Conversations" />
+          </ListItem>
+        </>
 
-            </ListItem>
-          </>
-        )}
-
-        {width < 770 && (
-          <>
-            <ListItem
-              button
-              key="searchUsers"
-              onClick={() => navigate("/searchusers")}
-            >
-              <ListItemIcon>
-                <SearchOutlinedIcon className="menu-icon" />
-              </ListItemIcon>
-              <ListItemText primary="Search Users" />
-            </ListItem>
-
-           
-
-
-          </>
-        )}
-
-
+        <>
+          <ListItem
+            button
+            key="searchUsers"
+            onClick={() => navigate("/searchusers")}
+          >
+            <ListItemIcon>
+              <SearchOutlinedIcon className="menu-icon" />
+            </ListItemIcon>
+            <ListItemText primary="Search Users" />
+          </ListItem>
+        </>
       </List>
     </Box>
   );
@@ -261,10 +242,19 @@ const Navbar = () => {
       }}
       role="presentation"
     >
-     
       <div className="SideNotificationHeader">
-        <div className={`sideNavIcons ${value == 1 && 'sideselected'}`} onClick={() => setValue(1)}>Notifications  ({notifications?.length})</div>
-        <div className={`sideNavIcons ${value == 2 && 'sideselected'}`} onClick={() => setValue(2)}>Message Requests ({messageRequest?.length})</div>
+        <div
+          className={`sideNavIcons ${value == 1 && "sideselected"}`}
+          onClick={() => setValue(1)}
+        >
+          Notifications ({notifications?.length})
+        </div>
+        <div
+          className={`sideNavIcons ${value == 2 && "sideselected"}`}
+          onClick={() => setValue(2)}
+        >
+          Message Requests ({messageRequest?.length})
+        </div>
       </div>
       {value == 1 &&
         notifications.map((n) => (
@@ -301,19 +291,19 @@ const Navbar = () => {
             </div>
             {/* <div className="divider"></div> */}
           </>
-        ))
-      }
-      {value == 2 && (messageRequest.length > 0 || notifications.length > 0) && (
-        <>
-          <div>
-            {messageRequest?.map((m) => (
-              <>
-                <MessageRequest m={m} setMessageRequest={setMessageRequest} />
-              </>
-            ))}
-          </div>
-        </>
-      )}
+        ))}
+      {value == 2 &&
+        (messageRequest.length > 0 || notifications.length > 0) && (
+          <>
+            <div>
+              {messageRequest?.map((m) => (
+                <>
+                  <MessageRequest m={m} setMessageRequest={setMessageRequest} />
+                </>
+              ))}
+            </div>
+          </>
+        )}
     </Box>
   );
 
@@ -361,7 +351,8 @@ const Navbar = () => {
     setIsLoading(true);
     await ApiServices.updateuserProfileImage({
       userId: user_id,
-      image: changeImage, email: email
+      image: changeImage,
+      email: email,
     })
       .then(async (res) => {
         // console.log(res.data);
@@ -389,7 +380,6 @@ const Navbar = () => {
         setIsLoading(false);
         e.target.disabled = false;
       });
-
   };
 
   const deleteImg = async (e) => {
@@ -418,7 +408,6 @@ const Navbar = () => {
         );
         e.target.disabled = false;
       });
-
   };
 
   const handleClickOutside = (event) => {
@@ -488,24 +477,20 @@ const Navbar = () => {
 
   const { height, width } = useWindowDimensions();
 
-
-
   const logoutDecider = (value) => {
-  
-    if (value == 'All') {
+    if (value == "All") {
       socket.current.emit("logoutAll", {
         userId: user_id,
-        
       });
       localStorage.removeItem("user");
       localStorage.clear();
       window.location.href = "/login";
-    } else if (value == 'Single') {
+    } else if (value == "Single") {
       localStorage.removeItem("user");
       localStorage.clear();
       window.location.href = "/login";
     }
-  }
+  };
 
   return (
     <div
@@ -524,81 +509,48 @@ const Navbar = () => {
         <img
           id="logoImage"
           src={
-            localStorage.getItem("theme") == "light"
-              ? "/logo.png"
-              : "/logo.png"
+            localStorage.getItem("theme") == "light" ? "/logo.png" : "/logo.png"
           }
           alt="logo"
         />
       </div>
 
       <div className="menuIcons">
-        {width > 770 && (
-          <>
-           
-            <div style={{ position: "relative" }} title="Conversations">
-              {" "}
-              <MessageOutlinedIcon
-                id="conversations"
-                className="icon"
-                onClick={() => {
-                  navigate("/");
-                }}
-              ></MessageOutlinedIcon>
-              {messageCount.length > 0 && <div
-                className="Conversations-count"
-                title="unread conversations"
-              >
-                {messageCount.length}
-              </div>}
-            </div>
-
-            <div title="Search Users">
-              <SearchOutlinedIcon
-                id="searchusers"
-                className="icon"
-                onClick={() => navigate("/searchusers")}
-              ></SearchOutlinedIcon>
-            </div>
-
-            
-
-
-
-            
-
-            <div title="Notifications">
-              <NotificationsOutlinedIcon
-                id="notifications"
-                className="icon"
-                onClick={toggleNotificationDrawer("right", true)}
-              >
-                {notificationAlert && <div className="blinkBall"> </div>}
-              </NotificationsOutlinedIcon>
-            </div>
-
-            <Drawer
-              anchor="right"
-              open={notificationDrawerState["right"]}
-              onClose={toggleNotificationDrawer("right", false)}
-              onOpen={toggleNotificationDrawer("right", true)}
-            >
-              {NotificationList("right")}
-            </Drawer>
-          </>
-        )}
-
-        {width < 770 && (
-          <div id="notifications" className="icon">
-            <NotificationsOutlinedIcon
-              title="notifications"
+        <>
+          <div style={{ position: "relative" }} title="Conversations">
+            {" "}
+            <MessageOutlinedIcon
+              id="conversations"
+              className="icon"
               onClick={() => {
-                navigate("/notifications");
+                navigate("/");
               }}
-            ></NotificationsOutlinedIcon>
-            {notificationAlert && <div className="blinkBall"> </div>}
+            ></MessageOutlinedIcon>
+            {messageCount.length > 0 && (
+              <div className="Conversations-count" title="unread conversations">
+                {messageCount.length}
+              </div>
+            )}
           </div>
-        )}
+
+          <div title="Search Users">
+            <SearchOutlinedIcon
+              id="searchusers"
+              className="icon"
+              onClick={() => navigate("/searchusers")}
+            ></SearchOutlinedIcon>
+          </div>
+        </>
+
+        <div id="notifications" className="icon">
+          <NotificationsOutlinedIcon
+            title="notifications"
+            onClick={() => {
+              navigate("/notifications");
+            }}
+          ></NotificationsOutlinedIcon>
+          {notificationAlert && <div className="blinkBall"> </div>}
+        </div>
 
         {/* DARK AND WHITE THEME */}
         {/* <div
@@ -646,7 +598,6 @@ const Navbar = () => {
           }}
         >
           <img
-
             id="Profile-img"
             className="Profile-img"
             src={image !== undefined && image !== "" ? image : "/profile.png"}
@@ -669,23 +620,6 @@ const Navbar = () => {
             </abbr>
           )}
         </div>
-        {width < 770 && (
-          <>
-            <div className="icon" onClick={toggleDrawer("right", true)}>
-              <MenuRoundedIcon />
-            </div>
-            <Drawer
-              anchor="right"
-              open={drawerState["right"]}
-              onClose={toggleDrawer("right", false)}
-              onOpen={toggleDrawer("right", true)}
-              disableBackdropTransition={!isMobile}
-              disableDiscovery={!isMobile}
-            >
-              {list("right")}
-            </Drawer>
-          </>
-        )}
         <div className="userDetails" ref={userDetailsRef}>
           <span className="line-loader"></span>
           <div
@@ -706,7 +640,7 @@ const Navbar = () => {
                   borderRadius: "50%",
                   cursor: "pointer",
                   maxWidth: "100%",
-                  display: 'block'
+                  display: "block",
                 }}
                 src={
                   image !== undefined && image !== "" ? image : "/profile.png"
@@ -721,15 +655,12 @@ const Navbar = () => {
           </div>
 
           <div className="username">Hi, {userName}!</div>
-         
 
           <div className="editPopupActions">
-
             <div
               className="logout"
               onClick={() => {
-                setLogoutOpen(true)
-               
+                setLogoutOpen(true);
               }}
             >
               <i
@@ -751,42 +682,37 @@ const Navbar = () => {
           <DialogTitle
             id="alert-dialog-title"
             style={{ display: "flex", justifyContent: "center" }}
-          >
-
-          </DialogTitle>
+          ></DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              <div style={{fontSize: '20px'}}>
+              <div style={{ fontSize: "20px" }}>
                 How Do you want to logout ?
               </div>
 
-
-
               <div
-                style={{ display: "flex", gap: "2px", borderRadius: "10px", justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
+                style={{
+                  display: "flex",
+                  gap: "2px",
+                  borderRadius: "10px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
               >
                 <button
-                  onClick={()=>logoutDecider('All')}
+                  onClick={() => logoutDecider("All")}
                   style={{ whiteSpace: "nowrap", position: "relative" }}
                   disabled={changeImage === "" && isLoading}
                 >
-
-
                   Logout from all devices
-
                 </button>
                 <button
-                  onClick={() => logoutDecider('Single')}
+                  onClick={() => logoutDecider("Single")}
                   style={{ whiteSpace: "nowrap", position: "relative" }}
                   disabled={changeImage === "" && isLoading}
                 >
-
-
                   Logout from this device
-
                 </button>
-
-
               </div>
             </DialogContentText>
           </DialogContent>
@@ -816,9 +742,7 @@ const Navbar = () => {
                     width: "150px",
                   }}
                   src={
-                    image !== undefined && image !== ""
-                      ? image
-                      : "/profile.png"
+                    image !== undefined && image !== "" ? image : "/profile.png"
                   }
                   alt="Profile"
                 />
@@ -840,7 +764,13 @@ const Navbar = () => {
               </div>
 
               <div
-                style={{ display: "flex", gap: "2px", borderRadius: "10px", justifyContent: 'center', alignItems: 'center' }}
+                style={{
+                  display: "flex",
+                  gap: "2px",
+                  borderRadius: "10px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
                 <button
                   onClick={submit}
@@ -848,9 +778,17 @@ const Navbar = () => {
                   disabled={changeImage === "" && isLoading}
                 >
                   {isLoading ? (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "3px",
+                      }}
+                    >
                       <div className="button-loader"></div>
-                      <div><span style={{ marginLeft: "10px" }}>Updating...</span></div>
+                      <div>
+                        <span style={{ marginLeft: "10px" }}>Updating...</span>
+                      </div>
                     </div>
                   ) : (
                     <>

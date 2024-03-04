@@ -406,9 +406,6 @@ const IndividualMessage = () => {
             </Link>
             <div
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                navigate(`/user/${receiverId?._id}`);
-              }}
             >
               <img
                 className="Dp"
@@ -424,9 +421,6 @@ const IndividualMessage = () => {
             </div>
             <div
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                navigate(`/user/${receiverId?._id}`);
-              }}
             >
               <div className="User-name">{receiverId?.userName}</div>
               <div
@@ -468,7 +462,7 @@ const IndividualMessage = () => {
                 className="blockUnblock"
                 onClick={() => blockChat(user_id)}
               >
-                Close Chat
+                Block Chat
               </button>
             ))}
         </div>

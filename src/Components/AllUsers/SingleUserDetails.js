@@ -78,30 +78,14 @@ const SingleUserDetails = ({
                 />
               )}
             </div>
-            <div className="user-card-rating">
-              <div className="rating-content">
-                <i className="far fa-comment"></i>
-                <span style={{ marginLeft: "3px" }}>{d.comments?.length}</span>
-              </div>
-              <div className="rating-content">
-                <i className="far fa-star"></i>
-                <span style={{ marginLeft: "3px" }}>
-                  {averagereview.toFixed(1).split(".")[1] != "0"
-                    ? averagereview.toFixed(1)
-                    : averagereview.toFixed(0)}
-                </span>
-              </div>
-            </div>
           </div>
           <div className="user-card-details-text">
-            <span className="user-name" >
+            <div className="user-name" >
               {d.userName}
-            </span>
-            {d.educationDetails.length > 0 ? <span>
-              {d.educationDetails[0]?.grade} @ {d.educationDetails[0]?.college}
-            </span> : ""}
-            
-            <span className="skills">{d.skills?.join(", ")}</span>
+            </div>
+            <div style={{fontSize: '12px'}}>
+            {d.email}
+            </div>
           </div>
         </div>
         <div className="user-card-actions">
